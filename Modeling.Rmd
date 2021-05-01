@@ -39,7 +39,10 @@ binnedplot(model2$fitted.values[,3], model2$residuals[,3])
 ```
 
 ```{r}
-survival <- read.csv('survival.csv')
-head(survival)
+survival <- read.csv('surv_form_dummied.csv')
 ```
 
+```{r}
+model3 <- glm(event ~ ., data = survival, family = "binomial")
+binnedplot(model3$fitted.values, model3$residuals)
+```

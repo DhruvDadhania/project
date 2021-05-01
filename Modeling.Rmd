@@ -1,0 +1,45 @@
+---
+title: "Modeling"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(arm)
+library(nnet)
+```
+
+```{r}
+pre_raise <- read.csv('pre_raise.csv')
+```
+
+```{r}
+model1 <- glm(didRaise ~ ., data = pre_raise, family = "binomial")
+```
+
+```{r}
+binnedplot(model1$fitted.values[-c(209193)], model1$residuals[-c(209193)])
+```
+
+```{r}
+model2 <- multinom(hand_strength ~ position + stack_size, data = pre_raise)
+```
+
+```{r}
+binnedplot(model2$fitted.values[,1], model2$residuals[,1])
+```
+
+```{r}
+binnedplot(model2$fitted.values[,2], model2$residuals[,2])
+```
+
+```{r}
+binnedplot(model2$fitted.values[,3], model2$residuals[,3])
+```
+
+```{r}
+survival <- read.csv('survival.csv')
+head(survival)
+```
+
